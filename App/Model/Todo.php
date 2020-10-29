@@ -22,7 +22,7 @@ class Todo
 
     static public function findAll()
     {
-        $stmt = DataBaseHandler::query('SELECT * FROM `todos`');
+        $stmt = DataBaseHandler::query('SELECT * FROM todos');
         return $stmt->fetchAll(PDO::FETCH_FUNC, function($id, $description, $done, $rank){
             return new Todo($id, $description, $done, $rank);
         });
@@ -30,11 +30,15 @@ class Todo
 
     static public function findById(int $id)
     {
-        $stmt = DataBaseHandler::prepare('SELECT * FROM `todos` WHERE `id` = :id');
+
+        $stmt = DataBaseHandler::prepare('SELECT * FROM todos WHERE id = :id');
         $stmt->execute([':id' => $id]);
         $result = $stmt->fetchAll(PDO::FETCH_FUNC, function ($id, $description, $done, $rank) {
             return new Todo($id, $description, $done, $rank);
         });
+        if (empty($result)) {
+            return null;
+        }
         return $result[0];
     }
 
@@ -106,7 +110,16 @@ class Todo
         return $this;
     }
 
-    public function insert(): void
+    public function save(): void
+    {
+        if (is_null($this->getId())) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
+    }
+
+    protected function insert(): void
     {
         $stmt = DataBaseHandler::prepare("INSERT INTO todos (description, done, rank) VALUES (:description, :done, :rank)");
         $stmt->execute([
@@ -117,7 +130,7 @@ class Todo
         $this->id = DataBaseHandler::lastInsertId();
     }
 
-    public function update(): void
+    protected function update(): void
     {
         $stmt = DataBaseHandler::prepare("UPDATE todos SET description = :description, done = :done, rank = :rank WHERE id = :id");
         $stmt->execute([

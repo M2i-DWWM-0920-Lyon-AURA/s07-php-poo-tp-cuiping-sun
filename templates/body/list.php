@@ -1,19 +1,3 @@
-<?php
-
-use App\Model\Todo;
-
-require '../vendor/autoload.php';
-
-if (isset($_POST['descriptionModified'])) {
-    $todo = Todo::findById($_POST['id']);
-    $todo->setDescription($_POST['descriptionModified']);
-    $todo->update();
-}
-
-$todos = Todo::findAll();
-
-?>
-
 <h1>Ma liste de tâches</h1>
 <ul id="todo-list" class="list-group mb-4">
 
@@ -39,9 +23,9 @@ $todos = Todo::findAll();
 
             <div class="d-flex">
 
-                <?php if (isset($_POST['description']) && $_POST['description'] == $todo->getDescription()) : ?>
+                <?php if (isset($_POST['description']) && $_POST['description'] === $todo->getDescription()) : ?>
                 <?php else : ?>
-                    <form method="post" action="/todos/<?= $todo->getId() ?>/update">
+                    <form method="post" action="/todos">
                         <input type="hidden" name="rank" value="<?= $todo->getRank() ?>">
                         <input type="hidden" name="id" value="<?= $todo->getId() ?>">
                         <input type="hidden" name="description" value="<?= $todo->getDescription() ?>">
@@ -49,7 +33,7 @@ $todos = Todo::findAll();
                             <i class="fas fa-pen-nib"></i>
                         </button>
                     </form>
-                <?php endif; ?>
+                <?php endif ; ?>
 
                 <form method="post" action="/todos/<?= $todo->getId() ?>/delete">
                     <input type="hidden" name="deleteId" value="<?= $todo->getId() ?>">

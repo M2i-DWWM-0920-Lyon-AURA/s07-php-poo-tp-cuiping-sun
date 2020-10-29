@@ -34,14 +34,19 @@ $router->map('GET', '/todos', function() {
 	ViewController::List();
 });
 
+// Page modification d'une tâche à faire existante avant validation
+$router->map('POST', '/todos', function () {
+	ViewController::List();
+});
+
+// Page modification d'une tâche à faire existante après validation
+$router->map('POST', '/todos/[i:id]/update', function () {
+	ViewController::update();
+});
+
 // Page de Création d'une nouvelle tâche à faire
 $router->map('POST', '/todos/new', function () {
 	ViewController::new();
-});
-
-// Page modification d'une tâche à faire existante
-$router->map('POST', '/todos/[i:id]/update', function () {
-	ViewController::List();
 });
 
 // Page suppression d'une tâche à faire existante
@@ -76,5 +81,5 @@ if( is_array($match)) {
 // Sinon
 } else {
 	// Renvoie la page 404 du serveur
-	header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+	header('Location: ' . ViewController::notFound());
 }

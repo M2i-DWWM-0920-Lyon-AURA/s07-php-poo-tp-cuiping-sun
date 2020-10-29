@@ -7,6 +7,6 @@ $newTodo
     ->setDescription($_POST['description'])
     ->setRank($newTodo::count() + 1);
 
-$newTodo->insert();
+$newTodo->save();
 
 header('Location: /todos');

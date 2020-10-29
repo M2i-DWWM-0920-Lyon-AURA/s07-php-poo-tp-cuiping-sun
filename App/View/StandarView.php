@@ -24,6 +24,10 @@ class StandarView extends AbstractView
 
     protected function bodyRender()
     {
+        foreach ($this->variables as $varName => $value) {
+            $$varName = $value;
+        }
+
         foreach ($this->bodyTemplates as $bodyTemplate)
         {
             require '../templates/body/' . $bodyTemplate . '.php';

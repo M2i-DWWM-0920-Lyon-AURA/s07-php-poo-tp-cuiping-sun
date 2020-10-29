@@ -1,0 +1,1 @@
+<img src="https://freefrontend.com/assets/img/html-funny-404-pages/HTML-404-Crying-Baby-Page.png" alt="404 page not found">
