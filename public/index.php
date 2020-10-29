@@ -8,7 +8,10 @@
 // ================================================================
 
 // Active le chargement automatique des classes grâce à Composer
-require 'vendor/autoload.php';
+
+use App\Controller\ViewController;
+
+require '../vendor/autoload.php';
 
 // Crée un nouveau routeur
 $router = new AltoRouter();
@@ -23,27 +26,27 @@ $router = new AltoRouter();
 
 // Page d'accueil
 $router->map('GET', '/', function() {
-    require __DIR__ . '/pages/home.php';
+	ViewController::home();
 });
 
 // Page des tâches à faire
 $router->map('GET', '/todos', function() {
-    require __DIR__ . '/pages/todo.php';
+	ViewController::List();
 });
 
 // Page de Création d'une nouvelle tâche à faire
 $router->map('POST', '/todos/new', function () {
-	require __DIR__ . '/pages/todoNew.php';
+	ViewController::new();
 });
 
 // Page modification d'une tâche à faire existante
 $router->map('POST', '/todos/[i:id]/update', function () {
-	require __DIR__ . '/pages/todo.php';
+	ViewController::List();
 });
 
 // Page suppression d'une tâche à faire existante
 $router->map('POST', '/todos/[i:id]/delete', function () {
-	require __DIR__ . '/pages/todoDelete.php';
+	ViewController::delete();
 });
 
 
