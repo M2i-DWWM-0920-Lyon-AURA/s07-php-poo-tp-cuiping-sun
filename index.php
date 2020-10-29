@@ -31,6 +31,16 @@ $router->map('GET', '/todos', function() {
     require __DIR__ . '/pages/todo.php';
 });
 
+// Page de Création d'une nouvelle tâche à faire
+$router->map('POST', '/todos/new', function () {
+	require __DIR__ . '/pages/todoNew.php';
+});
+
+// Page modification d'une tâche à faire existante
+$router->map('POST', '/todos/[i:id]/update', function () {
+	require __DIR__ . '/pages/todo.php';
+});
+
 
 // ================================================================
 // Routeur
