@@ -128,6 +128,12 @@ class Todo
         ]);
     }
 
+    public function delete(): void
+    {
+        $stmt = DataBaseHandler::prepare("DELETE FROM todos WHERE id=:id");
+        $stmt->execute(['id' => $this->id]);
+    }
+
     static public function count()
     {
         $stmt = DataBaseHandler::query("SELECT * FROM todos");

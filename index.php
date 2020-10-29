@@ -41,6 +41,11 @@ $router->map('POST', '/todos/[i:id]/update', function () {
 	require __DIR__ . '/pages/todo.php';
 });
 
+// Page suppression d'une tâche à faire existante
+$router->map('POST', '/todos/[i:id]/delete', function () {
+	require __DIR__ . '/pages/todoDelete.php';
+});
+
 
 // ================================================================
 // Routeur

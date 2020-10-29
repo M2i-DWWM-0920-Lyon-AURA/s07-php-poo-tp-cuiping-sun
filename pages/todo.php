@@ -69,9 +69,13 @@ $todos = Todo::findAll();
                             </form>
                         <?php endif; ?>
 
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
+                        <form method="post" action="/todos/<?= $todo->getId() ?>/delete">
+                            <input type="hidden" name="deleteId" value="<?= $todo->getId() ?>">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+
                     </div>
 
 
