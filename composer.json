@@ -1,7 +1,8 @@
 {
     "name": "romai/s07-php-poo-tp",
     "require": {
-        "altorouter/altorouter": "^2.0"
+        "altorouter/altorouter": "^2.0",
+        "symfony/var-dumper": "^5.1"
     },
     "authors": [
         {
